@@ -1,0 +1,34 @@
+This project simulates a computer game tournament, performing the following functions:
+    1. Reading and retaining both teams and players in simply linked lists.
+    2. Qualification period in groups, according to score, so that the number of qualified teams is a power of 2.
+    3. Generating and performing all matches, until the winning team is reached.
+    4. Creation of the ranking made up of the last 8 teams left in the tournament, using one BST and one AVL in turn.
+
+1. Data retention was performed using simply linked lists using head start addition
+for time efficiency. The list of players was also retained in the same way.
+
+2. In order to find out the teams that will actually participate in the tournament, we found out what the biggest number is
+power of two using properties of bits (X & (X-1) == 0 <=> X - power of two). Also for
+a very fast deletion I retained for each weakest team the address of the team located before it.
+A problem (fixed) in this approach appeared when I had to delete the first or second team from the list,
+this requiring an extra check.
+
+3. For the actual tournament simulation, we used queues for holding matches and stacks for holding
+winners and losers. Also, at the end of each round I deleted from the team list the teams that
+were on the list of losers. This time I think I could have made the delete more efficient using the approach
+from requirement 2.
+
+4. To create a Top-8 I used both a BST and an AVL.
+
+For the simulation of this tournament, we used header files for a better structuring of the code.
+Thus, I have the following files:
+    -> player.h : all functions related to a player, such as reading information about it, copying it,
+                  adding it to the list and displaying known information;
+    -> team.h : all functions related to a team, such as reading information about it, copying it,
+                  adding them to the list, displaying and deleting known information;
+    -> bracket.h: the functions called for the purpose of the actual tournament simulation, such as creating and displaying the matches
+                  and deleting losing teams;
+    -> queue.h : all the functions a queue needs;
+    -> stack.h : all functions a stack needs + function to create stacks of winners / losers;
+    -> bst.h : all the functions a BST needs;
+    -> avl.h : all the functions an AVL needs;
